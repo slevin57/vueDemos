@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>Number is <b>{{stateNum}}</b>。Other states: <b> {{stateNum1}} </b></p>
+        <p><button @click="mutationIncrement()">+ increment</button> <button @click="mutationDecrement()">- decrement</button></p>
+        <p><button @click="actionIncrementIfOdd()">increment</button> if Number is <b>odd</b></p>
+        <p><button @click="actionIncrementAsync()">increment </button ><b> async </b></p>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex"></script>
+<script>
+    const {mapState,mapGetters,mapMutations,mapActions} = Vuex;
+    
+    const store = new Vuex.Store({
+        state:{
+            stateNum: 1,
+            stateNum1: 20,
+        },
+        getters:{
+            evenOrOdd: state => state.stateNum % 2 === 0 ? 'even' : 'odd',
+        },
+        mutations:{
+            mutationIncrement: state => state.stateNum++,
+            mutationDecrement: state => state.stateNum--,
+        },
+        actions:{
+            actionIncrementIfOdd(context){
+                if (context.getters.evenOrOdd == 'odd') {
+                    context.commit('mutationIncrement');
+                }
+            },
+            actionIncrementAsync(context){
+                return new Promise( (resolve, reject) => {
+                    setTimeout(() => {
+                        context.commit('mutationIncrement');
+                        resolve();
+                    }, 1000);
+                })
+            },
+        }
+    })
+
+    const vue = new Vue({
+        el: '#app',
+        store,
+        data(){
+            return{
+                localNum:5,
+            }
+        },
+        computed:{
+            ...mapState([
+                'stateNum',
+                'stateNum1',
+            ]),
+            ...mapGetters([
+                'evenOrOdd',
+            ])
+        },
+        methods:{
+            /***@description
+             * 因为mutation与action均为方法，所以需要混入到methods属性中；
+             * 以字符串数组为参数的形式混入之后，可以直接在局部调用，因为局部的名字和store中的名字是一样的。
+            */
+            ...mapMutations([
+                'mutationIncrement',
+                'mutationDecrement',
+            ]),
+            ...mapActions([
+                'actionIncrementIfOdd',
+                'actionIncrementAsync',
+            ]),
+        }
+    })
+</script>
+</html>
