@@ -1,21 +1,21 @@
 <template>
   <div id="app">
       d
-      <!-- {{count}} -->
+      {{count}}
   </div>
 </template>
 
 <script>
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
     data () {
         return {
-
+            
         }
     },
     computed:{
-        // ...mapState(['count'])
+        ...mapState(['count'])
     },
     mounted(){
 
