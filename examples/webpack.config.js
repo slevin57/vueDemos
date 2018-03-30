@@ -32,7 +32,7 @@ module.exports = {
             entries[dir] = ['webpack-hot-middleware/client', entry]
         }
 
-        console.log('最终返回的entries对象', entries);
+        // console.log('最终返回的entries对象', entries);
         return entries
     }, {}),
 
