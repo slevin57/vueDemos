@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <anchored-heading :level="1">Hello world!</anchored-heading>
+
+        <!-- <single-slot>
+            <span>this is slot</span>
+        </single-slot>
+
+        <multi-slot>
+            <div slot="name1">this is slot</div>
+            <div slot="name2">The position is slot2 </div>
+        </multi-slot> -->
+
+        <single-slot-scope>
+            <template scope="props">
+                <div>{{props.text}}</div>
+            </template>
+        </single-slot-scope>
+
+        <multi-slot-scope>
+            <template slot="name2" scope="props">
+                <div>{{props.text}}</div>
+            </template>
+            <template slot="name1" scope="props">
+                <span>{{props.text}}</span>
+            </template>
+        
+        </multi-slot-scope>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+<script>
+    Vue.component('anchored-heading', {
+        render: function (createElement) {
+            return createElement(
+                // tag name 标签名称,必传
+                // {String | Object | Function}
+                'h' + this.level,  
+                // 组件上的各种属性，选传
+                // {Object}
+                // 一个包含模板相关属性的数据对象
+                {   
+                    'class': {
+                        foo: true,
+                        bar: false
+                    },
+                    style: {
+                        color: 'red',
+                        fontSize: '14px'
+                    },
+                    attrs: {
+                        id: 'foo'
+                    },
+                },
+                // {String | Array}
+                // 子节点 (VNodes)，由 `createElement()` 构建而成，
+                // 或使用字符串来生成“文本节点”。可选参数。
+                [this.$slots.default,'我是另外一些内容']
+            )
+        },
+        props: {
+            level: {
+                type: Number,
+                required: true
+            }
+        }
+    })
+
+    // render中使用单个slot
+    Vue.component('single-slot', {
+        render: function (createElement) {
+            var he = createElement('div', { domProps: { innerHTML: 'this child div' } });
+            return createElement('section', ['this is a String',he, this.$slots.default],)
+        }
+    }); 
+
+    // render中使用多个slot
+    Vue.component('multi-slot', {
+        render: function (createElement) {
+            var he = createElement('div', { domProps: { innerHTML: 'this child div' } });
+            return createElement('div', [he, this.$slots.name2, this.$slots.name1])
+        }
+    }); 
+
+    // render中使用单个slot-scope
+    Vue.component('single-slot-scope', {
+        render: function (createElement) {
+            var he = createElement('div', { domProps: { innerHTML: 'this child div' } });
+            return createElement('div', [he, this.$scopedSlots.default({
+                text: 'hello scope'
+            })])
+        }
+    });      
+
+    //render中使用多个slot-scope
+    Vue.component('multi-slot-scope', {
+        render: function (createElement) {
+            var he = createElement('div', { domProps: { innerHTML: 'this child div' } });
+            return createElement('div',
+                [he,
+                    this.$scopedSlots.name1({
+                        text: 'hello scope'
+                    }),
+                    this.$scopedSlots.name2({
+                        text: '$scopedSlots using'
+                    })])
+        }
+    });  
+
+    new Vue({
+        el: "#app"
+    })
+</script>
+</html>
