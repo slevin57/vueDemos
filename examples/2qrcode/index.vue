@@ -1,34 +1,33 @@
 <template>
   <div id="main">
-      <section>
+      <!-- <section>
           <h1>qrious</h1>
         <canvas id="qrious"></canvas>
         <img :src="qriousToDataURL" alt="">
-      </section>
-      <section>
-          <h1>qartjs</h1>
-          <div id="qartjs"></div>
-      </section>
-      <img src="/assets/test2.jpg" alt="">
+      </section> -->
+      <vue-qrious :value="value"></vue-qrious>
+      <button @click="change()">change</button>
   </div>
 </template>
 
 <script>
 import Qrious from 'qrious'
-import Qartjs from 'qartjs'
 
 
 export default {
     data(){
         return {
             qriousToDataURL:'',
+            value:'sdfdfasdf',
         }
     },
     mounted(){
         this.execQrious();
-        this.execQartjs();
     },
     methods:{
+        change(){
+            this.value = '3333'
+        },
         execQrious(){
             let qrious = 
             new Qrious({
@@ -48,20 +47,6 @@ export default {
             })
             // 通过toDataURL([mime])方法可以生成二维码的Base64编码数据的URI。如果你没有指定MIME Type，会使用默认值作为mime类型。
             this.qriousToDataURL = qrious.toDataURL();
-        },
-        execQartjs(){
-            const qart = new Qartjs({
-                value: 'http://www.laihua.com',
-                imagePath: '/assets/test2.jpg',
-                size: 100,
-                // background: '#000',
-                /**Define an image filter. threshold or color */
-                // filter: 'color',
-                /** Place image type(scale_to_fit or fill)*/
-                // fillType: 'fill',
-            });      
-            qart.make(document.getElementById('qartjs'))
-            
         }
     }
 }
