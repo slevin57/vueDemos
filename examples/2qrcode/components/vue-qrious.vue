@@ -11,97 +11,56 @@ export default {
         return {qrious: null};
     },
     props: {
-        value: {
-            type: String,
-            required: true
-        },
-        background: {
-            type: String,
-            default: 'white'
-        },
-        backgroundAlpha: {
-            type: Number,
-            default: 0.0
-        },
-        foreground: {
-            type: String,
-            default: 'black'
-        },
-        foregroundAlpha: {
-            type: Number,
-            default: 1.0
-        },
-        level: {
-            type: String,
-            default: 'L'
-        },
-        mime: {
-            type: String,
-            default: 'image/png'
-        },
-        padding: {
-            type: Number,
-            default: null
-        },
-        size: {
-            type: Number,
-            default: 100
-        },
-    },
-    watch: {
-        background () {
-            this.qrious.background = this.background;
-        },
-        backgroundAlpha () {
-            this.qrious.backgroundAlpha = this.backgroundAlpha;
-        },
-        foreground () {
-            this.qrious.foreground = this.foreground;
-        },
-        foregroundAlpha () {
-            this.qrious.foregroundAlpha = this.foregroundAlpha;
-        },
-        level () {
-            this.qrious.level = this.level;
-        },
-        mime () {
-            this.qrious.mime = this.mime;
-        },
-        padding () {
-            this.qrious.padding = this.padding;
-        },
-        size () {
-            this.qrious.size = this.size;
-        },
-        value () {
-            console.log(this.qrious);
-            
-            this.qrious.value = this.value;
+        config:{
+            type:Object,
+            required: true,
+            // default: function(){
+            //     return {
+            //         value:'dfdsfafasvalue',
+            //         size: 100,
+            //     }
+            // }
         }
     },
+    watch: {
+        'config.value':function (){
+            this.qrious.value = this.config.value;
+        },
+        'config.size':function (){
+            this.qrious.size = this.config.size;
+        },
+        'config.padding':function (){
+            this.qrious.padding = this.config.padding;
+        },
+        'config.background':function (){
+            this.qrious.background = this.config.background;
+        },
+        'config.backgroundAlpha':function (){
+            this.qrious.backgroundAlpha = this.config.backgroundAlpha;
+        },
+        'config.foreground':function (){
+            this.qrious.foreground = this.config.foreground;
+        },
+        'config.foregroundAlpha':function (){
+            this.qrious.foregroundAlpha = this.config.foregroundAlpha;
+        },
+        'config.level':function (){
+            this.qrious.level = this.config.level;
+        },
+        'config.mime':function (){
+            this.qrious.mime = this.config.mime;
+        },
+    },
     mounted () {
+        
         const element = this.$refs.qrcode;
-        const background = this.background;
-        const backgroundAlpha = this.backgroundAlpha;
-        const foreground = this.foreground;
-        const foregroundAlpha = this.foregroundAlpha;
-        const level = this.level;
-        const mime = this.mime;
-        const padding = this.padding;
-        const size = this.size;
-        const value = this.value;
+        // const config = this.config;
         this.qrious = new Qrious({
             element,
-            background,
-            backgroundAlpha,
-            foreground,
-            foregroundAlpha,
-            level,
-            mime,
-            padding,
-            size,
-            value
+            ...this.config,
+            // value:'44334'
         });
+        
     }
 }
 </script>
