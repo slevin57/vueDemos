@@ -6,8 +6,8 @@ import Vue from 'vue'
  */
 import index from './index.vue'
 
-import loadimg from './components/loadimg.vue'
-Vue.component('loadimg',loadimg)
+import lazyload from './components/lazyload.vue'
+Vue.component('lazyload',lazyload)
 
 new Vue({
     el: '#app',
