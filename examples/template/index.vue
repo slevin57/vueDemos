@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-      This is a most foundamental tempalte.
+      This is the most foundamental tempalte.
   </div>
 </template>
 
