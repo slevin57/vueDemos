@@ -39,6 +39,8 @@ export default {
         },
         'config.size':function (){
             this.qrious.size = this.config.size;
+            console.log(this.qrious.size);
+            
         },
         'config.padding':function (){
             this.qrious.padding = this.config.padding;
