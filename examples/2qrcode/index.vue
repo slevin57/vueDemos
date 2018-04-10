@@ -1,13 +1,18 @@
 <template>
   <div id="main">
-      <button @click="change('value')">change value</button>
-      <button @click="change('size')">change size</button>
-      <button @click="change('background')">change background</button>
-      <button @click="change('backgroundAlpha')">change backgroundAlpha</button>
-      <button @click="change('foreground')">change foreground</button>
-      <button @click="change('foregroundAlpha')">change foregroundAlpha</button>
-      <button @click="change('level')">change level</button>
-      <vue-qrious :config="config"></vue-qrious>
+      <section>
+        <button @click="change('value')">change value</button>
+        <button @click="change('size')">change size</button>
+        <button @click="change('background')">change background</button>
+        <button @click="change('backgroundAlpha')">change backgroundAlpha</button>
+        <button @click="change('foreground')">change foreground</button>
+        <button @click="change('foregroundAlpha')">change foregroundAlpha</button>
+        <button @click="change('level')">change level</button></br>
+        <img :src="base64" alt="">
+      </section>
+      <section>
+          <vue-qrious :config="config" @sendDataURL="receiveDataURL"></vue-qrious>
+      </section>
   </div>
 </template>
 
@@ -19,7 +24,7 @@ export default {
     data(){
         return {
             config:{
-                value:'',
+                value:'dd',
                 size:100,
                 padding: 0,
                 background:'white',
@@ -28,7 +33,8 @@ export default {
                 foregroundAlpha: 1,
                 level:'L',
                 mime:'image/png',
-            }
+            },
+            base64:'',
         }
     },
     mounted(){
@@ -72,6 +78,9 @@ export default {
                     break;
             }
         },
+        receiveDataURL: function(payload){
+            this.base64 = payload.base64;
+        }
     }
 }
 </script>

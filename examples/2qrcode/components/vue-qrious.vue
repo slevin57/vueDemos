@@ -1,6 +1,7 @@
 <template>
-    <div>
+    <div style="display:flex;justify-contetn:cente;align-items:center;">
         <canvas ref="qrcode"></canvas>
+        <button @click="toDataURL">toDataURL</button>
     </div>
 </template>
 
@@ -28,6 +29,7 @@ export default {
                     * 级别越高，纠错能力越高，数据量也会增加，同样尺寸看起来也会更密。
                     */
                     level:'L',
+                    // 二维码输出为图片时的MIME类型。
                     mime:'image/png',
                 }
             }
@@ -39,8 +41,6 @@ export default {
         },
         'config.size':function (){
             this.qrious.size = this.config.size;
-            console.log(this.qrious.size);
-            
         },
         'config.padding':function (){
             this.qrious.padding = this.config.padding;
@@ -60,7 +60,6 @@ export default {
         'config.level':function (){
             this.qrious.level = this.config.level;
         },
-        // 二维码输出为图片时的MIME类型。
         'config.mime':function (){
             this.qrious.mime = this.config.mime;
         },
@@ -74,6 +73,12 @@ export default {
             ...this.config,
         });
         
+    },
+    methods:{
+        toDataURL(){
+            const base64 = this.qrious.toDataURL();
+            this.$emit('sendDataURL',{base64})
+        }
     }
 }
 </script>
