@@ -9,6 +9,9 @@ import index from './index.vue'
 import uploadimg from './components/uploadimg.vue'
 Vue.component('uploadimg',uploadimg)
 
+// import axios from 'axios'
+// Object.defineProperty(Vue.prototype, '$http', { value: axios })
+
 new Vue({
     el: '#app',
     render: h => h(index)
