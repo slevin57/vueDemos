@@ -1,13 +1,13 @@
 import 'babel-polyfill'
 import Vue from 'vue'
 /**
- * 组建的引入必须是相对路径；
+ * 组件的引入必须是相对路径；
  * 必须带.vue后缀。
  */
 import index from './index.vue'
 
-import sonComponent from './components/index.vue'
-Vue.component('sonComponent', sonComponent)
+import uploadimg from './components/uploadimg.vue'
+Vue.component('uploadimg',uploadimg)
 
 new Vue({
     el: '#app',
