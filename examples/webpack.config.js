@@ -55,7 +55,8 @@ module.exports = {
 
     resolve: {
         alias: {
-            vuex: path.resolve(__dirname, '../src/index.esm.js')
+            vuex: path.resolve(__dirname, '../src/index.esm.js'),
+            'assets': path.resolve(__dirname, './assets'), //相对路径解析为绝对路径并赋予别名assets
         }
     },
 
