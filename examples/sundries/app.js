@@ -6,8 +6,8 @@ import Vue from 'vue'
  */
 import index from './index.vue'
 
-import Render from './components/render.vue'
-Vue.component(Render.name, Render)
+import inputTwoWayBindByRender from './components/inputTwoWayBindByRender.vue'
+Vue.component(inputTwoWayBindByRender.name, inputTwoWayBindByRender)
 
 new Vue({
     el: '#app',

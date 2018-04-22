@@ -1,7 +1,7 @@
 
 <script>
     export default {
-        name: 'render',
+        name: 'inputTwoWayBindByRender',
         data () {
             return {
                 value:'',
@@ -11,7 +11,7 @@
             let self = this;
             return h('div',[
                 h('input',{
-                    // dom属性，注意要与html特性attr区分开
+                    // dom属性，注意要与html特性attrs区分开
                     domProps:{
                         value:this.value
                     },
