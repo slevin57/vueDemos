@@ -7,7 +7,7 @@ import Vue from 'vue'
 import index from './index.vue'
 
 import uploadimg from './components/uploadimg.vue'
-Vue.component('uploadimg',uploadimg)
+Vue.component(uploadimg.name,uploadimg)
 
 // import axios from 'axios'
 // Object.defineProperty(Vue.prototype, '$http', { value: axios })
