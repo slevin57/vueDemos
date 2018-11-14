@@ -122,7 +122,7 @@
         methods: {
             loadDataFn() {
                 this.loadHint = `执行加载数据的方法${this.loadNum++}`
-                console.log('加载数据的方法:',this.$http.get);
+                // console.log('加载数据的方法:',this.$http.get);
             }
         }
     }
