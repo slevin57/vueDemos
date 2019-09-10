@@ -4,7 +4,6 @@
         <ul class="content" v-infinite-scroll="loadDataOpt2">
             <li v-for="(item,index) in lists" >
                 <div class="pic" v-load-img="item.imgLink">
-                    <!-- <img src="../assets/pic1.jpeg" alt="本地图片" srcset=""> -->
                     <img :src="item.imgLink" alt="Bing每日图片超高清" />
                 </div>
                 <p>第{{index}}行：{{item.title}}</p>

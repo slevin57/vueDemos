@@ -95,6 +95,17 @@
                         }
                     })
                 },
+                // 判断图片是否在视口区域内
+                // 可用于lazyload, infinite scroll等常见功能
+                isInViewport (el,binding) {
+                    let rect = el.getBoundingClientRect();
+                    let viewport = binding.def.getViewport();
+
+                    return  rect.bottom >0 
+                            && rect.top < (viewport.height) 
+                            && rect.left < (viewport.width)
+                            && rect.right >0;
+                },
                 // 获取视口大小
                 // 当`document.compatMode==BackCompat`时，为`混杂模式`,浏览器客户区宽度是document.body.clientWidth；
                 // 当`document.compatMode==CSS1Compat`时，为`标准模式`，浏览器客户区宽度是document.documentElement.clientWidth。
@@ -112,17 +123,6 @@
                         }
                     }
                 },
-                // 判断图片是否在视口区域内
-                // 可用于lazyload, infinite scroll等常见功能
-                isInViewport (el,binding) {
-                    let rect = el.getBoundingClientRect();
-                    let viewport = binding.def.getViewport();
-
-                    return  rect.bottom >0 
-                            && rect.top < (viewport.height) 
-                            && rect.left < (viewport.width)
-                            && rect.right >0;
-                }
             }
         },
     }
