@@ -33,6 +33,7 @@ module.exports = {
         }
 
         // console.log('最终返回的entries对象', entries);
+        console.log(`entries:`,entries);
         return entries
     }, {}),
 
